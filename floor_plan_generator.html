@@ -1,0 +1,90 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AI Floor Plan Generator</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-image: url('https://www.transparenttextures.com/patterns/black-paper.png');
+                background-color: #f3f3f3;
+                color: #333;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+            .container {
+                background: rgba(255, 255, 255, 0.9);
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            .form-group {
+                margin-bottom: 15px;
+            }
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+            }
+            .form-group input {
+                width: 100%;
+                padding: 8px;
+                box-sizing: border-box;
+            }
+            #floor-plan {
+                margin-top: 20px;
+                display: grid;
+                gap: 10px;
+            }
+            .room {
+                background: #4CAF50;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 5px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>AI Floor Plan Generator</h1>
+            <div class="form-group">
+                <label for="numRooms">Number of Rooms:</label>
+                <input type="number" id="numRooms" min="1" max="10">
+            </div>
+            <div class="form-group">
+                <label for="roomSize">Room Size (in px):</label>
+                <input type="number" id="roomSize" min="50" max="300">
+            </div>
+            <button onclick="generateFloorPlan()">Generate Floor Plan</button>
+            <div id="floor-plan"></div>
+        </div>
+
+        <script>
+            function generateFloorPlan() {
+                const numRooms = document.getElementById('numRooms').value;
+                const roomSize = document.getElementById('roomSize').value;
+                const floorPlan = document.getElementById('floor-plan');
+                
+                floorPlan.innerHTML = '';
+                floorPlan.style.gridTemplateColumns = `repeat(auto-fill, minmax(${roomSize}px, 1fr))`;
+
+                for (let i = 0; i < numRooms; i++) {
+                    const room = document.createElement('div');
+                    room.className = 'room';
+                    room.style.width = `${roomSize}px`;
+                    room.style.height = `${roomSize}px`;
+                    room.textContent = `Room ${i + 1}`;
+                    floorPlan.appendChild(room);
+                }
+            }
+        </script>
+    </body>
+    </html>
+    
